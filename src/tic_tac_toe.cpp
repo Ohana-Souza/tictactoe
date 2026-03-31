@@ -2,10 +2,12 @@
 #include <random>
 #include <thread>
 #include <array>
+#include <mutex>
 
 // Classe TicTacToe
 class TicTacToe {
   private:
+  std::mutex mutex_tela; //melhorar exibição do tabuleiro usando mutex para evitar que as threads se misturem (print principalmente)
   std::array<std::array<char, 3>, 3> board; // Tabuleiro do jogo
   char current_player; // Jogador atual ('X' ou 'O')
   bool game_over; // Estado do jogo
@@ -40,6 +42,7 @@ class TicTacToe {
   }
   
   bool make_move(char player, int row, int col) {
+    std::lock_guard<std::mutex> lock(mutex_tela); // Garantir que apenas uma thread acesse o tabuleiro por vez
     // Implementar a lógica para realizar uma jogada no tabuleiro
     if(!game_over){
       if(board[row][col] != 'X' && board[row][col] != 'O'){
