@@ -44,23 +44,24 @@ class TicTacToe {
   bool make_move(char player, int row, int col) {
     std::lock_guard<std::mutex> lock(mutex_tela); // Garantir que apenas uma thread acesse o tabuleiro por vez
     // Implementar a lógica para realizar uma jogada no tabuleiro
-    if(!game_over){
-      if(board[row][col] != 'X' && board[row][col] != 'O'){
-        board[row][col] = player;
-        display_board();
-        game_over = is_game_over();
+    if (game_over || player != current_player) {
+      return false; 
+    }
+
+    if(board[row][col] == ' '){  //casa vazia?
+        board[row][col] = player; 
+        game_over = is_game_over(); //atualiza ANTES de mudar o jogador, para garantir que o vencedor seja atualizado corretamente
+        
         if(player == 'O'){
           current_player = 'X';
         }else{
           current_player = 'O';
         }
-        return 1;
-      }else{
-        return 0;
-      }
-    }else{
-      return 1;
+        
+        display_board();
+        return true;
     }
+    return false; //casa ocupada
   }
   
   bool check_win(char player) {
