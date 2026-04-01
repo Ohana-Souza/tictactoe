@@ -194,19 +194,6 @@ class Player {
 int main() {
   time_t t = time(NULL);
   struct tm tm = *localtime(&t);
-  std::cout << "====================================================" << std::endl;
-  std::cout << "Ohana Souza: 2023038272" << std::endl;
-
-  // Formatação de data e hora usando manipuladores C++
-  std::cout << "Executado em: " 
-            << std::setfill('0') << std::setw(2) << tm.tm_mday << "/"
-            << std::setfill('0') << std::setw(2) << tm.tm_mon + 1 << "/"
-            << (tm.tm_year + 1900) << " "
-            << std::setfill('0') << std::setw(2) << tm.tm_hour << ":"
-            << std::setfill('0') << std::setw(2) << tm.tm_min << ":"
-            << std::setfill('0') << std::setw(2) << tm.tm_sec << std::endl;
-
-  std::cout << "====================================================" << std::endl;
 
   // Inicializar o jogo e os jogadores
   TicTacToe tabuleiro;
@@ -224,11 +211,28 @@ int main() {
   
   // Exibir o resultado final do jogo
   char vencedor = tabuleiro.get_winner();
+  std::cout << "====================================================" << std::endl;
+ 
   if(vencedor == 'D'){
-    std::cout<<" O resultado é: EMPATE!\n";
+    std::cout<<"O resultado é: EMPATE!\n";
   }else{
-    std::cout<<" O vencedor é o jogador: "<<vencedor<<"\n";
+    std::cout<<"O vencedor é o jogador: "<<vencedor<<"\n";
   }
   
+  std::cout << "----------------------------------------------------" << std::endl;
+
+  std::cout << "Ohana Souza: 2023038272" << std::endl;
+
+  // Formatação de data e hora usando manipuladores C++
+  std::cout << "Executado em: " 
+            << std::setfill('0') << std::setw(2) << tm.tm_mday << "/"
+            << std::setfill('0') << std::setw(2) << tm.tm_mon + 1 << "/"
+            << (tm.tm_year + 1900) << " "
+            << std::setfill('0') << std::setw(2) << tm.tm_hour << ":"
+            << std::setfill('0') << std::setw(2) << tm.tm_min << ":"
+            << std::setfill('0') << std::setw(2) << tm.tm_sec << std::endl;
+
+  std::cout << "====================================================" << std::endl;
+
   return 0;
 }
