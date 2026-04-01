@@ -116,7 +116,7 @@ class TicTacToe {
     return 1;
   }
   
-  bool is_game_over() {
+  bool is_game_over(char player) { //recebe como parâmetro o jogador que acabou de jogar, para verificar se ele venceu ou se houve empate
     // Retornar se o jogo terminou
     if(check_win(current_player)){
       return 1;
