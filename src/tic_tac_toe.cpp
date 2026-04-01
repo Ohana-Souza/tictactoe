@@ -40,9 +40,6 @@ class TicTacToe {
   }
   
   void display_board() {
-    //tentativa do tabuleiro parar de tremer
-    std::lock_guard<std::mutex> lock(mutex_tela);
-
     // Exibir o tabuleiro no console
     std::system("clear");
     for(int i = 0; i < 3; i++){
@@ -52,7 +49,7 @@ class TicTacToe {
       }
     }
     std::cout << std::endl;
-    //terminal travado, talvez o sleep ajude a melhorar a exibição do tabuleiro
+    //melhorar a exibição do tabuleiro
     std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
   
