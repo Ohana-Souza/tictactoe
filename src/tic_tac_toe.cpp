@@ -40,6 +40,8 @@ class TicTacToe {
   }
   
   void display_board() {
+    //tentativa do tabuleiro parar de tremer
+    std::lock_guard<std::mutex> lock(mutex_tela);
 
     // Exibir o tabuleiro no console
     std::system("clear");
@@ -49,6 +51,7 @@ class TicTacToe {
         std::cout << "-----" << std::endl;
       }
     }
+    std::cout << std::endl;
   }
   
   bool make_move(char player, int row, int col) {
