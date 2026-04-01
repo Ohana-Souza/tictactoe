@@ -62,7 +62,7 @@ class TicTacToe {
 
     if(board[row][col] == ' '){  //casa vazia?
         board[row][col] = player; 
-        game_over = is_game_over(); //atualiza ANTES de mudar o jogador, para garantir que o vencedor seja atualizado corretamente
+        game_over = is_game_over(player); //atualiza ANTES de mudar o jogador, para garantir que o vencedor seja atualizado corretamente
         
         if(player == 'O'){
           current_player = 'X';
@@ -118,7 +118,7 @@ class TicTacToe {
   
   bool is_game_over(char player) { //recebe como parâmetro o jogador que acabou de jogar, para verificar se ele venceu ou se houve empate
     // Retornar se o jogo terminou
-    if(check_win(current_player)){
+    if(check_win(player)){
       return 1;
     }else if(check_draw()){
       winner = 'D';
