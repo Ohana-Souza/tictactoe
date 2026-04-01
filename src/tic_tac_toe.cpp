@@ -161,8 +161,9 @@ class Player {
   private:
   void play_sequential() {
     // Implementar a estratégia sequencial de jogadas
-    for(int i = 0; i < 3; i++){
-      for(int j = 0; j < 3; j++){
+    //checagem de fimd e tabuleiro implementada no loop da função play para evitar que o jogador fique preso em um loop infinito caso o tabuleiro esteja cheio ou o jogo já tenha acabado
+    for(int i = 0; i < 3 && game.get_winner() == '-'; i++){
+      for(int j = 0; j < 3 && game.get_winner() == '-'; j++){
         if(game.make_move(symbol, i, j)){
           return;
         }
@@ -178,7 +179,7 @@ class Player {
     static std::random_device rd;
     static std::mt19937 gen(rd());
     static std::uniform_int_distribution<> distr(0, 2);
-    while(!fim){
+    while(!fim && game.get_winner() == '-'){ //no caso de tabuleiro cheio estava sendo travado no loop infinito, agora ele verifica se o jogo já acabou para evitar isso
       l = distr(gen);
       c = distr(gen);
       fim = game.make_move(symbol, l, c);
