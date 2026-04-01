@@ -4,6 +4,9 @@
 #include <array>
 #include <mutex>
 #include <atomic>
+#include <iomanip>
+#include <ctime>
+
 
 // Classe TicTacToe
 class TicTacToe {
@@ -189,6 +192,22 @@ class Player {
 
 // Função principal
 int main() {
+  time_t t = time(NULL);
+  struct tm tm = *localtime(&t);
+  std::cout << "====================================================" << std::endl;
+  std::cout << "Ohana Souza: 2023038272" << std::endl;
+
+  // Formatação de data e hora usando manipuladores C++
+  std::cout << "Executado em: " 
+            << std::setfill('0') << std::setw(2) << tm.tm_mday << "/"
+            << std::setfill('0') << std::setw(2) << tm.tm_mon + 1 << "/"
+            << (tm.tm_year + 1900) << " "
+            << std::setfill('0') << std::setw(2) << tm.tm_hour << ":"
+            << std::setfill('0') << std::setw(2) << tm.tm_min << ":"
+            << std::setfill('0') << std::setw(2) << tm.tm_sec << std::endl;
+
+  std::cout << "====================================================" << std::endl;
+
   // Inicializar o jogo e os jogadores
   TicTacToe tabuleiro;
   tabuleiro.display_board();
@@ -206,9 +225,9 @@ int main() {
   // Exibir o resultado final do jogo
   char vencedor = tabuleiro.get_winner();
   if(vencedor == 'D'){
-    std::cout<<" Empate!\n";
+    std::cout<<" O resultado é: EMPATE!\n";
   }else{
-    std::cout<<" Vencedor: "<<vencedor<<"\n";
+    std::cout<<" O vencedor é o jogador: "<<vencedor<<"\n";
   }
   
   return 0;
