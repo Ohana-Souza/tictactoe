@@ -52,6 +52,8 @@ class TicTacToe {
       }
     }
     std::cout << std::endl;
+    //terminal travado, talvez o sleep ajude a melhorar a exibição do tabuleiro
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
   
   bool make_move(char player, int row, int col) {
