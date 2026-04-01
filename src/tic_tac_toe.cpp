@@ -3,16 +3,26 @@
 #include <thread>
 #include <array>
 #include <mutex>
+#include <atomic>
 
 // Classe TicTacToe
 class TicTacToe {
   private:
   std::mutex mutex_tela; //melhorar exibição do tabuleiro usando mutex para evitar que as threads se misturem (print principalmente)
   std::array<std::array<char, 3>, 3> board; // Tabuleiro do jogo
+  
+  /*
+  //Bloco implementado deixa as variáveis como comuns.
+  // A não concorrência dessas variáveis pode gerar uma leitura ERRADA de valor
+  // Basicamente a situação de Data Race 
   char current_player; // Jogador atual ('X' ou 'O')
   bool game_over; // Estado do jogo
   char winner; // Vencedor do jogo
-  
+  */
+  std::atomic<char> current_player; // Jogador atual ('X' ou 'O')
+  std::atomic<bool> game_over; // Estado do jogo
+  std::atomic<char> winner; // Vencedor do jogo
+
   public:
   TicTacToe() {
     // Inicializar o tabuleiro e as variáveis do jogo
